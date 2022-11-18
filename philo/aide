@@ -1,0 +1,7 @@
+ATTENTION : il y a un piege dans philosophers : les arguments sont en 
+
+millisecondes (1/1 000 seconde) alors que 
+
+usleep() et gettimeofday() utilisent des 
+
+microsecondes (1/1 000 000 seconde)
