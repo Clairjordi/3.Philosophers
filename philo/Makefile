@@ -10,7 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = mandatory/main.c
+SRCS = mandatory/main.c \
+	   mandatory/arg/verif_arg.c \
+	   mandatory/utils/utils.c 
+
 
 OBJS = ${SRCS:.c=.o}
 
