@@ -6,13 +6,16 @@
 #    By: clorcery <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 11:31:17 by clorcery          #+#    #+#              #
-#    Updated: 2022/11/18 14:22:45 by clorcery         ###   ########.fr        #
+#    Updated: 2022/11/26 16:05:28 by clorcery         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = mandatory/main.c \
-	   mandatory/arg/verif_arg.c \
-	   mandatory/utils/utils.c 
+	   mandatory/verif_arg.c \
+	   mandatory/init.c \
+	   mandatory/philosophers.c \
+	   mandatory/free.c \
+	   mandatory/utils.c 
 
 
 OBJS = ${SRCS:.c=.o}
@@ -38,4 +41,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-

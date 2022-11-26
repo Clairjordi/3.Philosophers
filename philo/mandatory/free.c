@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/18 11:33:39 by clorcery          #+#    #+#             */
-/*   Updated: 2022/11/26 14:48:39 by clorcery         ###   ########.fr       */
+/*   Created: 2022/11/26 10:25:24 by clorcery          #+#    #+#             */
+/*   Updated: 2022/11/26 10:41:31 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-int	main(int argc, char **argv)
+void	ft_free(t_banquet *banquet)
 {
-	t_banquet	banquet;
-
-	if (ft_verif_arg(argc, argv) == -1)
-		return (1);
-	if (ft_init(&banquet, argc, argv) == -1)
-		return (1);
-	if (ft_philo(&banquet) == -1)
-		return (1);
-	ft_free(&banquet);
-	return (0);
+	/* int	i; */
+    /*  */
+	/* i = 0; */
+	if (banquet->mutex_fork != NULL)
+	{
+		/* while (i < banquet->nb_philo) */
+		/* { */
+		/* 	if (banquet->mutex_fork[i] != NULL) */
+		/* 		free(banquet->mutex_fork[i]); */
+		/* 	i++; */
+		/* } */
+		free(banquet->mutex_fork);
+	}
+	free(banquet->philo);
 }
