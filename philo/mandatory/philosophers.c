@@ -89,6 +89,26 @@ int	ft_philo_nb_eat(t_banquet *banquet)
 	return (FALSE);
 }
 
+int	ft_find_dead_philo(t_banquet *banquet)
+{
+	int	i;
+
+	i = 0;
+	while(i < banquet->nb_philo)
+	{
+		if (banquet->philo[i].dead_philo == TRUE)
+		{
+			if (ft_display(&banquet->philo[i], banquet,
+						"\033[1;31mdied\033[0;0m") == -1)
+				return (-1);
+			break ;
+		}
+		i++;
+	}
+	return(0);
+
+}
+
 int	ft_verif_die(t_philo *philo, t_banquet *banquet)
 {
 	int	current_time;
@@ -98,29 +118,34 @@ int	ft_verif_die(t_philo *philo, t_banquet *banquet)
 	current_time = ft_change_time(banquet);
 	if (philo->had_eat == FALSE && current_time > banquet->time_die)
 	{
-		banquet->end = TRUE;
+		/* pthread_mutex_lock(&banquet->mutex_die);  */
+		/* banquet->end = TRUE;  */
+		/* pthread_mutex_unlock(&banquet->mutex_die); */
 		philo->dead_philo = TRUE;
+		//ft_find_dead_philo(banquet);
 		return (END);
 	}
 	if (philo->had_eat == TRUE)
 	{
 		result = current_time - philo->time_eat;
 		tmp = banquet->time_die / 1000;
-		pthread_mutex_lock(&banquet->mutex_print);
-		printf("result = %d - tmp = %d\n", result, tmp);
-		pthread_mutex_unlock(&banquet->mutex_print);
 		if (result > tmp)
 		{
-			banquet->end = TRUE;
+			/* pthread_mutex_lock(&banquet->mutex_die); */
+			/*  banquet->end = TRUE;  */
+			/* pthread_mutex_unlock(&banquet->mutex_die); */
 			philo->dead_philo = TRUE;
+			//ft_find_dead_philo(banquet);
 			return (END);
 		}
 	}
 	if (banquet->nb_must_eat != -1 && philo->nb_eat == banquet->nb_must_eat)
 	{
 		if (ft_philo_nb_eat(banquet) == TRUE)
-		{
-			banquet->end = TRUE;
+		{	
+			/* pthread_mutex_lock(&banquet->mutex_die); */
+			/*  banquet->end = TRUE;  */
+			/* pthread_mutex_unlock(&banquet->mutex_die); */
 			return (END);
 		}
 	}
@@ -149,11 +174,18 @@ void	*start_routine(void *struc)
 				return (NULL);
 			usleep(banquet->time_sleep);
 		}
-		if (banquet->end == TRUE) 
+		if (ft_verif_die(philo, banquet) == END)
+		{	
+			pthread_mutex_lock(&banquet->mutex_die);
+			ft_find_dead_philo(banquet);
+			banquet->end = TRUE;
+			pthread_mutex_unlock(&banquet->mutex_die);
 			return (NULL);
+		}
 	}
 	return (NULL);
 }
+
 
 int	ft_create_thread(t_banquet *banquet)
 {
@@ -163,18 +195,16 @@ int	ft_create_thread(t_banquet *banquet)
 	i = 0;
 	philo = banquet->philo;
 	banquet->time_start = ft_time_start();
-	while (i < banquet->nb_philo && banquet->end == FALSE)
+	while (i < banquet->nb_philo  && banquet->end == FALSE )
 	{
 		if (pthread_create(&(philo[i].thread), NULL, start_routine,
 			&(philo[i])) != 0)
 		{
 			ft_putendl_fd("Error : pthread_create", 2);
 			return (-1);
-		}
+		}	
 		i++;
 	}
-	if (banquet->end == TRUE)
-		printf("it's over\n");
 	return (0);
 }
 

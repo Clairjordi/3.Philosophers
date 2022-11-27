@@ -46,6 +46,7 @@ typedef struct s_banquet
 	long long 		time_start;
 	int				end;
 	pthread_mutex_t	mutex_print;
+	pthread_mutex_t	mutex_die;
 	pthread_mutex_t	*mutex_fork;
 	t_philo			*philo;
 }	t_banquet;

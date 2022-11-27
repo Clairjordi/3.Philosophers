@@ -37,6 +37,12 @@ int	ft_init_banquet(t_banquet *banquet, int ac, char **av)
 		ft_putendl_fd("Error : Mutex init", 2);
 		return (-1);
 	}
+	if (pthread_mutex_init(&banquet->mutex_die, NULL) != 0)
+	{
+		ft_putendl_fd("Error : Mutex init", 2);
+		return (-1);
+	}
+
 	banquet->mutex_fork = malloc(sizeof(pthread_mutex_t) * banquet->nb_philo);
 	if (!banquet->mutex_fork)
 	{
