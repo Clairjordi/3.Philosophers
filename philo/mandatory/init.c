@@ -31,6 +31,7 @@ int	ft_init_banquet(t_banquet *banquet, int ac, char **av)
 		banquet->nb_must_eat = ft_atoi(av[5]);
 	else
 		banquet->nb_must_eat = -1;
+	banquet->end = FALSE;
 	if (pthread_mutex_init(&banquet->mutex_print, NULL) != 0)
 	{
 		ft_putendl_fd("Error : Mutex init", 2);
@@ -65,7 +66,11 @@ int	ft_init_philo(t_banquet *banquet)
 		philo[i].fork_right = i;
 		if (i > 0)
 			philo[i].fork_left = i - 1;
+		philo[i].had_eat = FALSE;
+		philo[i].time_eat = 0; // utile ?
+		philo[i].dead_philo = FALSE;
 		philo[i].banquet = banquet;
+		philo[i].nb_eat = 0;
 		i++;
 	}
 	philo[0].fork_left = i - 1;

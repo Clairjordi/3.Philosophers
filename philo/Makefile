@@ -14,6 +14,8 @@ SRCS = mandatory/main.c \
 	   mandatory/verif_arg.c \
 	   mandatory/init.c \
 	   mandatory/philosophers.c \
+	   mandatory/mutex.c \
+	   mandatory/utils_philo.c \
 	   mandatory/free.c \
 	   mandatory/utils.c 
 

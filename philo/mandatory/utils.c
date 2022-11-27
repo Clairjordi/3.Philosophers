@@ -12,6 +12,17 @@
 
 #include "../include/philo.h"
 
+int	ft_verif_res(int result, char *s)
+{
+	if (result != 0)
+	{
+		write(2, "Error : ", 8);
+		ft_putendl_fd(s, 2);
+		return (-1);
+	}
+	return (0);
+}
+
 int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
