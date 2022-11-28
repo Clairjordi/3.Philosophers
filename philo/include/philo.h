@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:31:40 by clorcery          #+#    #+#             */
-/*   Updated: 2022/11/26 18:23:42 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:41:37 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ typedef struct s_philo
 	int					pos_philo;
 	pthread_t			thread;
 	int					time_eat;
-	int					had_eat;
+	//int					had_eat;
 	int					nb_eat;
 	int					fork_right;
 	int					fork_left;
-	int					dead_philo;
+	pthread_mutex_t		mutex_val;
+	//int					dead_philo;
 	struct s_banquet	*banquet;
 }	t_philo;
 
@@ -45,6 +46,7 @@ typedef struct s_banquet
 	int				nb_must_eat;
 	long long 		time_start;
 	int				end;
+	pthread_t		th_death;
 	pthread_mutex_t	mutex_print;
 	pthread_mutex_t	mutex_die;
 	pthread_mutex_t	*mutex_fork;
@@ -73,6 +75,7 @@ int			ft_destroy_mutex(t_banquet *banquet);
 long long	ft_time_start();
 long long	ft_change_time(t_banquet *banquet);
 int			ft_display(t_philo *philo, t_banquet *banquet, char *s);
+int 		ft_get_end(t_banquet *banquet);
 
 /*utils*/
 int			ft_isdigit(int c);

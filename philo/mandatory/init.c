@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:37:12 by clorcery          #+#    #+#             */
-/*   Updated: 2022/11/26 14:51:55 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/11/28 13:17:14 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,17 @@ int	ft_init_philo(t_banquet *banquet)
 		philo[i].fork_right = i;
 		if (i > 0)
 			philo[i].fork_left = i - 1;
-		philo[i].had_eat = FALSE;
+		//philo[i].had_eat = FALSE;
 		philo[i].time_eat = 0; // utile ?
-		philo[i].dead_philo = FALSE;
+		//ilo[i].dead_philo = FALSE;
 		philo[i].banquet = banquet;
 		philo[i].nb_eat = 0;
+		if (pthread_mutex_init(&philo[i].mutex_val, NULL) != 0)
+		{
+			ft_putendl_fd("Error : Mutex init", 2);
+			return (-1);
+		}
+
 		i++;
 	}
 	philo[0].fork_left = i - 1;

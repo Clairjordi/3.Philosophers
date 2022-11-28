@@ -30,6 +30,21 @@ long long	ft_change_time(t_banquet *banquet)
 	return (time);
 }
 
+int	ft_get_end(t_banquet *banquet)
+{
+	int	ret;
+	int	res;
+
+	res = pthread_mutex_lock(&banquet->mutex_die);
+	if (ft_verif_res(res, "Mutex lock") == -1)
+		return (-1);
+	ret = banquet->end;
+	res = pthread_mutex_unlock(&banquet->mutex_die);
+	if (ft_verif_res(res, "Mutex unlock") == -1)
+		return (-1);
+	return (ret);
+}
+
 int	ft_display(t_philo *philo, t_banquet *banquet, char *s)
 {
 	int	time_milli;
@@ -41,7 +56,8 @@ int	ft_display(t_philo *philo, t_banquet *banquet, char *s)
 	res = pthread_mutex_lock(&banquet->mutex_print);
 	if (ft_verif_res(res, "Mutex lock") == -1)
 		return (-1);
-	printf("%d %d %s\n",time_milli, philo->pos_philo, s);
+	if (ft_get_end(banquet) == FALSE)
+		printf("%d %d %s\n",time_milli, philo->pos_philo, s);
 	res = pthread_mutex_unlock(&banquet->mutex_print);
 	if (ft_verif_res(res, "Mutex unlock") == -1)
 		return (-1);
