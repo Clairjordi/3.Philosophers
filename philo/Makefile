@@ -6,7 +6,7 @@
 #    By: clorcery <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 11:31:17 by clorcery          #+#    #+#              #
-#    Updated: 2022/11/26 16:05:28 by clorcery         ###   ########.fr        #
+#    Updated: 2022/12/02 18:47:45 by clorcery         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,12 @@ SRCS = mandatory/main.c \
 	   mandatory/init.c \
 	   mandatory/philosophers.c \
 	   mandatory/mutex.c \
-	   mandatory/utils_philo.c \
-	   mandatory/free.c \
-	   mandatory/utils.c 
+	   mandatory/eat.c \
+	   mandatory/die.c \
+	   mandatory/time.c \
+	   mandatory/display.c \
+	   mandatory/utils.c \
+	   mandatory/free.c 
 
 
 OBJS = ${SRCS:.c=.o}

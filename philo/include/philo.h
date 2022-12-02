@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:31:40 by clorcery          #+#    #+#             */
-/*   Updated: 2022/11/28 13:41:37 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/02 18:46:56 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,22 @@ typedef struct s_philo
 {
 	int					pos_philo;
 	pthread_t			thread;
-	int					time_eat;
-	//int					had_eat;
+	long				time_eat;
 	int					nb_eat;
 	int					fork_right;
 	int					fork_left;
 	pthread_mutex_t		mutex_val;
-	//int					dead_philo;
 	struct s_banquet	*banquet;
 }	t_philo;
 
 typedef struct s_banquet
 {
 	int				nb_philo;
-	int				time_die;
-	int				time_eat;
-	int				time_sleep;
+	long			time_die;
+	long			time_eat;
+	long			time_sleep;
 	int				nb_must_eat;
-	long long 		time_start;
+	long 			time_start;
 	int				end;
 	pthread_t		th_death;
 	pthread_mutex_t	mutex_print;
@@ -65,17 +63,35 @@ int			ft_init_banquet(t_banquet *banquet, int ac, char **av);
 int			ft_init_philo(t_banquet *banquet);
 
 /*philosophers*/
+int			ft_is_thinking(t_philo *philo);
+void		*start_routine(void *struc);
+int			ft_create_thread(t_banquet *banquet);
 int			ft_philo(t_banquet *banquet);
 
 /*mutex*/
 int			ft_create_mutex_fork(t_banquet *banquet);
 int			ft_destroy_mutex(t_banquet *banquet);
 
-/*utils_philo*/
-long long	ft_time_start();
-long long	ft_change_time(t_banquet *banquet);
+/*display*/
 int			ft_display(t_philo *philo, t_banquet *banquet, char *s);
-int 		ft_get_end(t_banquet *banquet);
+int			ft_display_die(t_philo *philo, t_banquet *banquet, char *s);
+
+/*eat*/
+int			ft_set_time_eat(t_philo *philo);
+int			ft_recup_info_eat(t_philo *philo, t_banquet *banquet);
+int			ft_is_eating(t_philo *philo, t_banquet *banquet);
+
+/*die*/
+int			ft_get_time_eat(t_philo *philo);
+int			ft_get_nb_eat(t_banquet *banquet, int i);
+int			ft_philo_nb_eat(t_banquet *banquet);
+int			ft_get_end(t_banquet *banquet);
+void		*ft_verif_die(void	*struc);
+
+/*time*/
+long		ft_time_start(void);
+long		ft_change_time(t_banquet *banquet);
+int			ft_usleep(t_banquet *banquet, long time_to_wait);
 
 /*utils*/
 int			ft_isdigit(int c);

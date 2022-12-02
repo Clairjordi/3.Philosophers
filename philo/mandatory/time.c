@@ -1,0 +1,61 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   time.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/02 18:21:05 by clorcery          #+#    #+#             */
+/*   Updated: 2022/12/02 18:49:06 by clorcery         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../include/philo.h"
+
+long	ft_time_start(void)
+{
+	long long		time;
+	struct timeval	tv;
+
+	if (gettimeofday(&tv, NULL) == -1)
+	{
+		ft_putendl_fd("Error : gettimofday time_start", 2);
+		return (-1);
+	}
+	time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	return (time);
+}
+
+long	ft_change_time(t_banquet *banquet)
+{
+	long			time;
+	struct timeval	tv;
+
+	if (gettimeofday(&tv, NULL) == -1)
+	{
+		ft_putendl_fd("Error : gettimeofday", 2);
+		return (-1);
+	}
+	time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	time = time - banquet->time_start;
+	return (time);
+}
+
+int	ft_usleep(t_banquet *banquet, long time_to_wait)
+{
+	long	time;
+	int		res;
+
+	time = ft_change_time(banquet);
+	if (time == -1)
+		return (-1);
+	while (time + time_to_wait > ft_change_time(banquet))
+	{
+		if (ft_get_end(banquet) == TRUE)
+			break ;
+		res = usleep(25);
+		if (ft_verif_res(res, "usleep") == -1)
+			return (-1);
+	}
+	return (0);
+}

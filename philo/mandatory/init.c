@@ -6,43 +6,31 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:37:12 by clorcery          #+#    #+#             */
-/*   Updated: 2022/11/28 13:17:14 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/02 18:20:31 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-static int	ft_recup_time_to(char *av)
-{
-	int	time_to;
-
-	time_to = ft_atoi(av);
-	time_to *= 1000;
-	return (time_to);
-}
-
 int	ft_init_banquet(t_banquet *banquet, int ac, char **av)
 {
+	int	res;
+
 	banquet->nb_philo = ft_atoi(av[1]);
-	banquet->time_die = ft_recup_time_to(av[2]);
-	banquet->time_eat = ft_recup_time_to(av[3]);
-	banquet->time_sleep = ft_recup_time_to(av[4]);
+	banquet->time_die = ft_atoi(av[2]);
+	banquet->time_eat = ft_atoi(av[3]);
+	banquet->time_sleep = ft_atoi(av[4]);
 	if (ac == 6)
 		banquet->nb_must_eat = ft_atoi(av[5]);
 	else
 		banquet->nb_must_eat = -1;
 	banquet->end = FALSE;
-	if (pthread_mutex_init(&banquet->mutex_print, NULL) != 0)
-	{
-		ft_putendl_fd("Error : Mutex init", 2);
+	res = pthread_mutex_init(&banquet->mutex_print, NULL);
+	if (ft_verif_res(res, "Mutex init"))
 		return (-1);
-	}
-	if (pthread_mutex_init(&banquet->mutex_die, NULL) != 0)
-	{
-		ft_putendl_fd("Error : Mutex init", 2);
+	res = pthread_mutex_init(&banquet->mutex_die, NULL);
+	if (ft_verif_res(res, "Mutex init"))
 		return (-1);
-	}
-
 	banquet->mutex_fork = malloc(sizeof(pthread_mutex_t) * banquet->nb_philo);
 	if (!banquet->mutex_fork)
 	{
@@ -52,10 +40,21 @@ int	ft_init_banquet(t_banquet *banquet, int ac, char **av)
 	return (0);
 }
 
+static void	ft_init_philo_bis(t_philo *philo, int i)
+{
+	philo[i].pos_philo = i + 1;
+	philo[i].fork_right = i;
+	if (i > 0)
+		philo[i].fork_left = i - 1;
+	philo[i].time_eat = 0;
+	philo[i].nb_eat = 0;
+}
+
 int	ft_init_philo(t_banquet *banquet)
 {
 	int		i;
 	t_philo	*philo;
+	int		res;
 
 	i = 0;
 	banquet->philo = malloc(sizeof(t_philo) * banquet->nb_philo);
@@ -68,21 +67,11 @@ int	ft_init_philo(t_banquet *banquet)
 	philo = banquet->philo;
 	while (i < banquet->nb_philo)
 	{
-		philo[i].pos_philo = i + 1;
-		philo[i].fork_right = i;
-		if (i > 0)
-			philo[i].fork_left = i - 1;
-		//philo[i].had_eat = FALSE;
-		philo[i].time_eat = 0; // utile ?
-		//ilo[i].dead_philo = FALSE;
+		ft_init_philo_bis(philo, i);
 		philo[i].banquet = banquet;
-		philo[i].nb_eat = 0;
-		if (pthread_mutex_init(&philo[i].mutex_val, NULL) != 0)
-		{
-			ft_putendl_fd("Error : Mutex init", 2);
+		res = pthread_mutex_init(&philo[i].mutex_val, NULL);
+		if (ft_verif_res(res, "Mutex init"))
 			return (-1);
-		}
-
 		i++;
 	}
 	philo[0].fork_left = i - 1;
