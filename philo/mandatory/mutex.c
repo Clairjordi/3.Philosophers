@@ -25,14 +25,13 @@ int	ft_destroy_mutex(t_banquet *banquet)
 {
 	int	i;
 
-	//i = 0;
 	i = banquet->nb_philo - 1;
 	if (pthread_join(banquet->th_death, NULL) != 0)
 	{
 		ft_putendl_fd("Error : pthread_join", 2);
 		return (-1);
 	}
-	while /*(i < banquet->nb_philo)*/(i >= 0)
+	while (i >= 0)
 	{	
 		if (pthread_join(banquet->philo[i].thread, NULL) != 0)
 		{
@@ -44,6 +43,7 @@ int	ft_destroy_mutex(t_banquet *banquet)
 		/* 	ft_putendl_fd("Error : mutex destroy, fork", 2); */
 		/* 	return (-1); */
 		/* } */
+		//manque le destroy de mutex_val
 		//i++;
 		i--;
 	}

@@ -6,7 +6,7 @@
 #    By: clorcery <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 11:31:17 by clorcery          #+#    #+#              #
-#    Updated: 2022/12/02 18:47:45 by clorcery         ###   ########.fr        #
+#    Updated: 2022/12/02 18:55:28 by clorcery         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS = mandatory/main.c \
 	   mandatory/mutex.c \
 	   mandatory/eat.c \
 	   mandatory/die.c \
+	   mandatory/die_util.c \
 	   mandatory/time.c \
 	   mandatory/display.c \
 	   mandatory/utils.c \

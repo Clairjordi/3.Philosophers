@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:31:40 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/02 18:46:56 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/02 18:55:58 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,13 @@ int			ft_recup_info_eat(t_philo *philo, t_banquet *banquet);
 int			ft_is_eating(t_philo *philo, t_banquet *banquet);
 
 /*die*/
+void		*ft_verif_die(void	*struc);
+
+/*die_util*/
 int			ft_get_time_eat(t_philo *philo);
 int			ft_get_nb_eat(t_banquet *banquet, int i);
 int			ft_philo_nb_eat(t_banquet *banquet);
 int			ft_get_end(t_banquet *banquet);
-void		*ft_verif_die(void	*struc);
 
 /*time*/
 long		ft_time_start(void);

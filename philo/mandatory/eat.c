@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:30:11 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/02 18:45:07 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/02 19:37:29 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int	ft_recup_info_eat(t_philo *philo, t_banquet *banquet)
 {
 	int	res;
 
-	ft_set_time_eat(philo);
+	res = ft_set_time_eat(philo);
+	if (res == -1)
+		return (-1);
 	if (banquet->nb_must_eat != -1)
 	{	
 		res = pthread_mutex_lock(&philo->mutex_val);
@@ -45,6 +47,7 @@ int	ft_recup_info_eat(t_philo *philo, t_banquet *banquet)
 	}
 	return (0);
 }
+
 int	ft_is_eating(t_philo *philo, t_banquet *banquet)
 {
 	int	res;
@@ -59,11 +62,11 @@ int	ft_is_eating(t_philo *philo, t_banquet *banquet)
 		return (-1);
 	if (ft_display(philo, banquet, "\033[1;32mhas taken a fork\033[0;0m") == -1)
 		return (-1);
-	if (ft_recup_info_eat(philo, banquet) == -1) // bien place ??
+	if (ft_recup_info_eat(philo, banquet) == -1)
 		return (-1);
 	if (ft_display(philo, banquet, "\033[1;34mis eating\033[0;0m") == -1)
 		return (-1);
-	if (ft_usleep(banquet, banquet->time_eat) == -1) //ft_usleep
+	if (ft_usleep(banquet, banquet->time_eat) == -1)
 		return (-1);
 	res = pthread_mutex_unlock(&banquet->mutex_fork[philo->fork_right]);
 	if (ft_verif_res(res, "Mutex unlock") == -1)

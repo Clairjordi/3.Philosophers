@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:37:12 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/02 18:20:31 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/02 19:57:02 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int	ft_init_philo(t_banquet *banquet)
 			return (-1);
 		i++;
 	}
-	philo[0].fork_left = i - 1;
+	if (banquet->nb_philo != 1)
+		philo[0].fork_left = i - 1;
 	return (0);
 }
 
