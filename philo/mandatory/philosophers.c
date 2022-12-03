@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 13:57:47 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/02 20:30:23 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/03 16:39:52 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,6 @@ int	ft_is_sleeping(t_philo *philo, t_banquet *banquet)
 	return (0);
 }
 
-int	ft_is_eating_one(t_philo *philo, t_banquet *banquet)
-{
-	int	res;
-
-	res = pthread_mutex_lock(&banquet->mutex_fork[philo->fork_right]);
-	if (ft_verif_res(res, "Mutex lock") == -1)
-		return (-1);
-	if (ft_display(philo, banquet, "\033[1;32mhas taken a fork\033[0;0m") == -1)
-		return (-1);
-	res = pthread_mutex_unlock(&banquet->mutex_fork[philo->fork_right]);
-	if (ft_verif_res(res, "Mutex unlock") == -1)
-		return (-1);
-	res = usleep(banquet->time_die);
-	if (res == -1)
-		return (-1);
-	banquet->end = TRUE;
-	return (0);
-}
-
 void	*start_routine(void *struc)
 {
 	t_philo		*philo;
@@ -65,16 +46,9 @@ void	*start_routine(void *struc)
 		usleep(1000);
 	while (ft_get_end(banquet) == FALSE)
 	{
-		if (ft_is_thinking(philo) == -1)
-			return (NULL);
 		if (ft_get_end(banquet) == FALSE)
 		{
-			if (banquet->nb_philo == 1)
-			{	
-				if (ft_is_eating_one(philo, banquet) == -1)
-					return (NULL);
-			}
-			else if (ft_is_eating(philo, banquet) == -1)
+			if (ft_is_eating(philo, banquet) == -1)
 				return (NULL);
 		}
 		if (ft_get_end(banquet) == FALSE)
@@ -82,6 +56,8 @@ void	*start_routine(void *struc)
 			if (ft_is_sleeping(philo, banquet) == -1)
 				return (NULL);
 		}
+		if (ft_is_thinking(philo) == -1)
+			return (NULL);
 	}
 	return (NULL);
 }

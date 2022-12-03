@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:21:05 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/02 18:49:06 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/03 17:02:26 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,21 @@ long	ft_change_time(t_banquet *banquet)
 	return (time);
 }
 
+static int	ft_usleep_bis(t_banquet *banquet, int time, long time_to_wait)
+{
+	int	res;
+
+	while (time + time_to_wait > ft_change_time(banquet))
+	{
+		if (ft_get_end(banquet) == TRUE)
+			break ;
+		res = usleep(25);
+		if (ft_verif_res(res, "usleep") == -1)
+			return (-1);
+	}
+	return (0);
+}
+
 int	ft_usleep(t_banquet *banquet, long time_to_wait)
 {
 	long	time;
@@ -49,12 +64,20 @@ int	ft_usleep(t_banquet *banquet, long time_to_wait)
 	time = ft_change_time(banquet);
 	if (time == -1)
 		return (-1);
-	while (time + time_to_wait > ft_change_time(banquet))
+	if (banquet->time_sleep == 0)
 	{
-		if (ft_get_end(banquet) == TRUE)
-			break ;
-		res = usleep(25);
-		if (ft_verif_res(res, "usleep") == -1)
+		while (time + time_to_wait >= ft_change_time(banquet))
+		{
+			if (ft_get_end(banquet) == TRUE)
+				break ;
+			res = usleep(25);
+			if (ft_verif_res(res, "usleep") == -1)
+				return (-1);
+		}
+	}
+	else
+	{
+		if (ft_usleep_bis(banquet, time, time_to_wait) == -1)
 			return (-1);
 	}
 	return (0);

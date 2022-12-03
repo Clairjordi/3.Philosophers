@@ -6,7 +6,7 @@
 #    By: clorcery <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 11:31:17 by clorcery          #+#    #+#              #
-#    Updated: 2022/12/02 18:55:28 by clorcery         ###   ########.fr        #
+#    Updated: 2022/12/03 17:04:14 by clorcery         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJS = ${SRCS:.c=.o}
 
 NAME = philo
 
-FLAGS = -Werror -Wextra -Wall -g -pthread #-fsanitize=thread
+FLAGS = -O3 -Werror -Wextra -Wall -g -pthread #-fsanitize=thread
 
 all: ${NAME}
 

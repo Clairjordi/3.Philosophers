@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:36:19 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/02 20:29:03 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/03 15:51:09 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_verif_die_bis(t_banquet *banquet, int i, int res)
 		return (-1);
 	result -= tmp;
 	if (result > banquet->time_die)
-	{
+	{	
 		res = pthread_mutex_lock(&banquet->mutex_die);
 		if (ft_verif_res(res, "Mutex lock") == -1)
 			return (-1);
@@ -66,12 +66,6 @@ void	*ft_verif_die(void	*struc)
 	banquet = (t_banquet *)struc;
 	i = 0;
 	res = 0;
-	/* if (banquet->nb_philo == 1) */
-	/* { */
-	/* 	if (ft_display_die(&banquet->philo[i], banquet, */
-	/* 			"\033[1;31mdied\033[0;0m") == -1) */
-	/* 	return (NULL); */
-	/* } */
 	while (1)
 	{
 		usleep(50);
@@ -86,7 +80,7 @@ void	*ft_verif_die(void	*struc)
 		if (res == -1)
 			return (NULL);
 		i++;
-		if (i == banquet->nb_philo - 1)
+		if (banquet->nb_philo == 1 || i == banquet->nb_philo - 1)
 			i = 0;
 	}
 	return (NULL);
