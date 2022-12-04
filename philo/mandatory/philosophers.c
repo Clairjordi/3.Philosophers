@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 13:57:47 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/03 16:39:52 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/04 14:29:34 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	*start_routine(void *struc)
 		usleep(1000);
 	while (ft_get_end(banquet) == FALSE)
 	{
+		if (ft_is_thinking(philo) == -1)
+			return (NULL);
 		if (ft_get_end(banquet) == FALSE)
 		{
 			if (ft_is_eating(philo, banquet) == -1)
@@ -55,7 +57,7 @@ void	*start_routine(void *struc)
 		{
 			if (ft_is_sleeping(philo, banquet) == -1)
 				return (NULL);
-		}
+		}	
 		if (ft_is_thinking(philo) == -1)
 			return (NULL);
 	}

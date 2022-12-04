@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:22:38 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/03 16:39:11 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/04 14:22:57 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	ft_verif_time_to(char **av)
 		if (ft_verif_max_int(av[i]) == -1)
 			return (-1);
 		arg_tmp = ft_atoi(av[i]);
-		if (arg_tmp < 0)
+		if (arg_tmp < 1)
 		{
 			ft_putendl_fd("Error : wrong number", 2);
 			return (-1);
@@ -105,13 +105,5 @@ int	ft_verif_arg(int ac, char **av)
 		return (-1);
 	if (ft_verif_time_to(av) == -1)
 		return (-1);
-	if (ac == 6)
-	{
-		if (ft_atoi(av[5]) == 0)
-		{
-			ft_putendl_fd("Error : wrong number", 2);
-			return (-1);
-		}
-	}
 	return (0);
 }
