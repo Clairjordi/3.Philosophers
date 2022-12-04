@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:37:12 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/03 16:31:13 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/04 20:36:51 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	ft_init_philo_bis(t_philo *philo, int i)
 	philo[i].fork_right = i;
 	if (i > 0)
 		philo[i].fork_left = i - 1;
-	philo[i].time_eat = 0;
+	philo[i].time_last_eat = 0;
 	philo[i].nb_eat = 0;
 }
 

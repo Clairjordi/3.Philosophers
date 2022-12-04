@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:36:19 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/03 15:51:09 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/04 20:30:14 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	*ft_verif_die(void	*struc)
 	res = 0;
 	while (1)
 	{
-		usleep(50);
 		res = ft_verif_die_bis(banquet, i, res);
 		if (res == 2)
 			break ;
@@ -81,7 +80,10 @@ void	*ft_verif_die(void	*struc)
 			return (NULL);
 		i++;
 		if (banquet->nb_philo == 1 || i == banquet->nb_philo - 1)
+		{
 			i = 0;
+			usleep(500);
+		}
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:54:32 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/02 18:56:09 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/04 20:37:31 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_get_time_eat(t_philo *philo)
 	res = pthread_mutex_lock(&philo->mutex_val);
 	if (ft_verif_res(res, "Mutex lock") == -1)
 		return (-1);
-	ret = philo->time_eat;
+	ret = philo->time_last_eat;
 	res = pthread_mutex_unlock(&philo->mutex_val);
 	if (ft_verif_res(res, "Mutex unlock") == -1)
 		return (-1);

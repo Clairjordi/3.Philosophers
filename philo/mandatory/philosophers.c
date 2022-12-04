@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 13:57:47 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/04 14:29:34 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/04 20:59:42 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,17 @@
 int	ft_is_thinking(t_philo *philo)
 {
 	t_banquet	*banquet;
+	long		time;
+	long		time_think;
 
 	banquet = (t_banquet *)philo->banquet;
+	time = ft_change_time(banquet) - philo->time_last_eat;
+	time_think = (banquet->time_die - time) - 10;
+	if (time_think <= 0)
+		return (0);
 	if (ft_display(philo, banquet, "\033[1;35mis thinking\033[0;0m") == -1)
 		return (-1);
+	ft_usleep(banquet, time_think);
 	return (0);
 }
 
@@ -43,11 +50,16 @@ void	*start_routine(void *struc)
 	philo = (t_philo *)struc;
 	banquet = (t_banquet *)philo->banquet;
 	if (philo->pos_philo % 2 == 0)
-		usleep(1000);
+	{
+		if (ft_display(philo, banquet, "\033[1;35mis thinking\033[0;0m") == -1)
+			return (NULL);
+		if (banquet->time_eat != 0)
+			ft_usleep(banquet, banquet->time_eat);
+		else
+			usleep(100);
+	}
 	while (ft_get_end(banquet) == FALSE)
 	{
-		if (ft_is_thinking(philo) == -1)
-			return (NULL);
 		if (ft_get_end(banquet) == FALSE)
 		{
 			if (ft_is_eating(philo, banquet) == -1)

@@ -27,7 +27,7 @@ typedef struct s_philo
 {
 	int					pos_philo;
 	pthread_t			thread;
-	long				time_eat;
+	long				time_last_eat;
 	int					nb_eat;
 	int					fork_right;
 	int					fork_left;
