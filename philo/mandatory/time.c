@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:21:05 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/04 19:55:07 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/05 15:38:23 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,21 @@ long	ft_change_time(t_banquet *banquet)
 	return (time);
 }
 
+static int	ft_usleep_bis(t_banquet *banquet, int time)
+{
+	int	res;
+
+	while (time / 100 > ft_change_time(banquet) / 100)
+	{
+		if (ft_get_end(banquet) == TRUE)
+			break ;
+		res = usleep(1000);
+		if (ft_verif_res(res, "usleep") == -1)
+			return (-1);
+	}
+	return (0);
+}
+
 int	ft_usleep(t_banquet *banquet, long time_to_wait)
 {
 	long	time;
@@ -52,14 +67,8 @@ int	ft_usleep(t_banquet *banquet, long time_to_wait)
 	time += time_to_wait;
 	if (time_to_wait >= 50)
 	{
-		while (time / 100 > ft_change_time(banquet) / 100)
-		{
-			if (ft_get_end(banquet) == TRUE)
-				break ;
-			res = usleep(1000);
-			if (ft_verif_res(res, "usleep") == -1)
-				return (-1);
-		}
+		if (ft_usleep_bis(banquet, time) == -1)
+			return (-1);
 	}
 	while (time > ft_change_time(banquet))
 	{

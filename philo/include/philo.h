@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:31:40 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/02 18:55:58 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/05 16:20:26 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_banquet
 	long			time_eat;
 	long			time_sleep;
 	int				nb_must_eat;
-	long 			time_start;
+	long			time_start;
 	int				end;
 	pthread_t		th_death;
 	pthread_mutex_t	mutex_print;
@@ -63,10 +63,14 @@ int			ft_init_banquet(t_banquet *banquet, int ac, char **av);
 int			ft_init_philo(t_banquet *banquet);
 
 /*philosophers*/
-int			ft_is_thinking(t_philo *philo);
-void		*start_routine(void *struc);
+int			ft_thread_join(t_banquet *banquet);
 int			ft_create_thread(t_banquet *banquet);
 int			ft_philo(t_banquet *banquet);
+
+/*routine*/
+int			ft_is_thinking(t_philo *philo);
+int			ft_is_sleeping(t_philo *philo, t_banquet *banquet);
+void		*start_routine(void *struc);
 
 /*mutex*/
 int			ft_create_mutex_fork(t_banquet *banquet);

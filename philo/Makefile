@@ -6,7 +6,7 @@
 #    By: clorcery <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/18 11:31:17 by clorcery          #+#    #+#              #
-#    Updated: 2022/12/03 17:04:14 by clorcery         ###   ########.fr        #
+#    Updated: 2022/12/05 13:16:05 by clorcery         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ SRCS = mandatory/main.c \
 	   mandatory/verif_arg.c \
 	   mandatory/init.c \
 	   mandatory/philosophers.c \
+	   mandatory/routine.c \
 	   mandatory/mutex.c \
 	   mandatory/eat.c \
 	   mandatory/die.c \

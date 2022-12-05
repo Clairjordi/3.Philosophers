@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:36:19 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/04 20:30:14 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/05 13:49:12 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,10 @@ void	*ft_verif_die(void	*struc)
 	while (1)
 	{
 		res = ft_verif_die_bis(banquet, i, res);
-		if (res == 2)
-			break ;
-		if (res == -1)
+		if (res == 2 || res == -1)
 			return (NULL);
 		res = ft_verif_die_ter(banquet, res);
-		if (res == 2)
-			break ;
-		if (res == -1)
+		if (res == 2 || res == -1)
 			return (NULL);
 		i++;
 		if (banquet->nb_philo == 1 || i == banquet->nb_philo - 1)
