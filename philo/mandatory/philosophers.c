@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 13:57:47 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/05 16:00:03 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/06 14:42:44 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,12 @@ int	ft_create_thread(t_banquet *banquet)
 
 int	ft_philo(t_banquet *banquet)
 {
-	if (ft_create_mutex_fork(banquet) == 1)
+	if (ft_create_mutex_fork(banquet) == -1)
 	{
 		ft_free(banquet);
 		return (-1);
 	}
-	if (ft_create_thread(banquet) == 1)
+	if (ft_create_thread(banquet) == -1)
 	{
 		ft_free(banquet);
 		return (-1);
@@ -78,7 +78,7 @@ int	ft_philo(t_banquet *banquet)
 		ft_free(banquet);
 		return (-1);
 	}
-	if (ft_destroy_mutex(banquet) == 1)
+	if (ft_destroy_mutex(banquet) == -1)
 	{
 		ft_free(banquet);
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 11:31:40 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/05 16:20:26 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/06 14:08:13 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_banquet
 	long			time_die;
 	long			time_eat;
 	long			time_sleep;
-	int				nb_must_eat;
+	long			nb_must_eat;
 	long			time_start;
 	int				end;
 	pthread_t		th_death;

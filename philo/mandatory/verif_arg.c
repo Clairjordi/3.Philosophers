@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 16:22:38 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/05 19:01:28 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/06 14:36:20 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_verif_max_int(char *s)
 	{
 		reponse = reponse * 10;
 		reponse = reponse + s[i] - '0';
-		if (reponse > 2147483647 || reponse < -2147483648)
+		if (reponse > 2147483647)
 		{
 			ft_putendl_fd("Error : overflow detected", 2);
 			return (-1);

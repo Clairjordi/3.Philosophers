@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:54:32 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/04 20:37:31 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/06 14:18:06 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int	ft_get_nb_eat(t_banquet *banquet, int i)
 	int	ret;
 	int	res;
 
-	res = pthread_mutex_lock(&banquet->mutex_die);
+	res = pthread_mutex_lock(&banquet->philo[i].mutex_val);
 	if (ft_verif_res(res, "Mutex lock") == -1)
 		return (-1);
 	ret = banquet->philo[i].nb_eat;
-	res = pthread_mutex_unlock(&banquet->mutex_die);
+	res = pthread_mutex_unlock(&banquet->philo[i].mutex_val);
 	if (ft_verif_res(res, "Mutex unlock") == -1)
 		return (-1);
 	return (ret);

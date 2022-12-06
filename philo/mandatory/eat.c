@@ -6,7 +6,7 @@
 /*   By: clorcery <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 18:30:11 by clorcery          #+#    #+#             */
-/*   Updated: 2022/12/04 20:36:35 by clorcery         ###   ########.fr       */
+/*   Updated: 2022/12/06 14:16:08 by clorcery         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_recup_info_eat(t_philo *philo, t_banquet *banquet)
 	res = ft_set_time_eat(philo);
 	if (res == -1)
 		return (-1);
-	if (banquet->nb_must_eat != 1)
+	if (banquet->nb_must_eat > 0)
 	{	
 		res = pthread_mutex_lock(&philo->mutex_val);
 		if (ft_verif_res(res, "Mutex lock") == -1)
