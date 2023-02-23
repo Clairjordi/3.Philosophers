@@ -8,9 +8,4 @@ Pour pouvoir manger, ils empruntent la fourchette de leur voisin, mange un temps
 et ensuite dort. Si i la du temps disponible entre manger et dormir alors il pense.
 Si le temps de manger et de dormir dépassent le temps de mort alors le philosophe meurt et le programme s'arrète.
 
-./philo [number_of_philosophers] [time_to_die] [time_to_eat] [time_to_sleep] [number_of_times_each_philosopher_must_eat] - seul paramètre optionnel,
-                                                                                                                          demande à ce que les philosophes 
-                                                                                                                          ne mangent que certain nombre de 
-                                                                                                                          fois avant de terminer le 
-                                                                                                                          programme.
-
+./philo [number_of_philosophers] [time_to_die] [time_to_eat] [time_to_sleep] [number_of_times_each_philosopher_must_eat] - seul paramètre optionnel,        demande à ce que les philosophes ne mangent qu'un certain nombre de fois avant de terminer le programme.
