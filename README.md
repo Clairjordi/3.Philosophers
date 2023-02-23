@@ -14,7 +14,7 @@ Si le temps de manger et de dormir dépassent le temps de mort alors le philosop
                                                                                                                           fois avant de terminer le 
                                                                                                                           programme.
 
----------------------
+_________________
 Compétences acquises : 
 - utilisations de thread
 - utilisation de mutex
