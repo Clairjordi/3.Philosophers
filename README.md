@@ -1,6 +1,6 @@
 # Philosophers
 
-(3/7) School Project 42 :
+(3/7) Common core school project 42 :
 
 Use of the thread and mutex functions of the C language, imaged as follows:
 philosophers are around a table and each has a fork. They can eat, sleep or think but cannot do it at the same time.
